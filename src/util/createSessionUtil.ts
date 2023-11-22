@@ -114,7 +114,7 @@ export default class CreateSessionUtil {
 
       client = clientsArray[session] = Object.assign(wppClient, client);
       await this.start(req, client);
-
+      /*
       if (req.serverOptions.webhook.onParticipantsChanged) {
         await this.onParticipantsChanged(req, client);
       }
@@ -133,6 +133,7 @@ export default class CreateSessionUtil {
       if (req.serverOptions.webhook.onLabelUpdated) {
         await this.onLabelUpdated(client, req);
       }
+      */
     } catch (e) {
       req.logger.error(e);
     }
@@ -199,13 +200,14 @@ export default class CreateSessionUtil {
       req.io.emit('session-error', client.session);
     }
 
-    await this.checkStateSession(client, req);
+    //  await this.checkStateSession(client, req);
     await this.listenMessages(client, req);
 
+    /*
     if (req.serverOptions.webhook.listenAcks) {
       await this.listenAcks(client, req);
     }
-
+*/
     if (req.serverOptions.webhook.onPresenceChanged) {
       await this.onPresenceChanged(client, req);
     }

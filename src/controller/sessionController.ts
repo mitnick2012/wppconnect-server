@@ -233,8 +233,19 @@ export async function closeSession(req: Request, res: Response) {
       schema: 'NERDWHATS_AMERICA'
      }
    */
+
+  // added this condition to avoid null error of session key
+
   const session = req.session;
+
   try {
+    if ((clientsArray as any)[session] === null) {
+      return await res.status(500).json({
+        status: false,
+        message: 'Error session not exist on client array',
+      });
+    }
+
     if ((clientsArray as any)[session].status === null) {
       return await res
         .status(200)

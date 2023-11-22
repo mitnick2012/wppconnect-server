@@ -77,10 +77,17 @@ export async function sendMessage(req: Request, res: Response) {
   const { phone, message } = req.body;
 
   const options = req.body.options || {};
+  const results: any[] = [];
 
   try {
-    const results: any = [];
     for (const contato of phone) {
+      //Added to avoid blocking sender number from whatsapp :D  30000  - 1000
+      const rnd: number = Math.floor(4000 + Math.random() * 2000);
+
+      try {
+        await req.client.startTyping(contato, rnd);
+      } catch (error) {}
+
       results.push(await req.client.sendText(contato, message, options));
     }
 
