@@ -104,7 +104,8 @@ yarn dev
 ```sh
 yarn build
 ```
-
+npm install
+npm run build 
 ---
 
 # Configuration
