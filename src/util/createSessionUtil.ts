@@ -200,8 +200,8 @@ export default class CreateSessionUtil {
       req.io.emit('session-error', client.session);
     }
 
-    //  await this.checkStateSession(client, req);
-    await this.listenMessages(client, req);
+    await this.checkStateSession(client, req);
+    // await this.listenMessages(client, req);
 
     /*
     if (req.serverOptions.webhook.listenAcks) {
